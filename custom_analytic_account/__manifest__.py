@@ -26,6 +26,7 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/account_payment.xml',
+        'wizards/account_payment_register_views.xml',
     ],
 
 }
