@@ -18,6 +18,8 @@ class AccountPaymentRegister(models.TransientModel):
         res['analytic_account_id'] = sale_order.analytic_account_id.id
         return res
 
-    # def _create_payment_vals_from_wizard(self,*args,**kwargs):
-    #     res = super()._create_payment_vals_from_wizard(args,kwargs)
-    #     return res
+    def _create_payments(self):
+        payments = super()._create_payments()
+        payments.analytic_account_id = self.analytic_account_id.id
+        payments.invoice_line_ids.analytic_account_id = self.analytic_account_id.id
+        return payments
