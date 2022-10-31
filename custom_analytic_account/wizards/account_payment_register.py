@@ -13,9 +13,9 @@ class AccountPaymentRegister(models.TransientModel):
     @api.model
     def default_get(self, fields):
         res = super().default_get(fields)
-        sale_order = self.env['account.move'].browse(
+        sale_order_id = self.env['account.move'].browse(
             self._context.get('active_id'))
-        res['analytic_account_id'] = sale_order.analytic_account_id.id
+        res['analytic_account_id'] = sale_order_id.analytic_account_id.id
         return res
 
     def _create_payments(self):
