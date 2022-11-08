@@ -1,3 +1,4 @@
+
 from odoo import api, fields, models
 
 
@@ -21,3 +22,4 @@ class AccountPayment(models.Model):
                     ], )
                 payment.analytic_account_id = related_accounts[
                     -1] if related_accounts else None
+
