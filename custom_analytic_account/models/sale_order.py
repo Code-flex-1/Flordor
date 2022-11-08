@@ -1,3 +1,4 @@
+
 from odoo import models, fields, api
 
 
@@ -6,6 +7,7 @@ class SaleOrder(models.Model):
     analytic_account_id = fields.Many2one(
         'account.analytic.account',
         'Analytic Account',
+        copy=False,
         domain="[('partner_id', '=',partner_id)]",
     )
 
@@ -31,5 +33,6 @@ class SaleOrder(models.Model):
             ('partner_id', '=', self.partner_id.id)
         ])
         if account:
-            data['analytic_account_id'] = account
+            data['analytic_account_id'] = account[0].id
         return data
+
