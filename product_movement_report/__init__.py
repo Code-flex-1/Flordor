@@ -1,2 +1,2 @@
-from . import  wizards
+from . import wizards
 from . import reports
