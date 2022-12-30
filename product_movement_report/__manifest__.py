@@ -21,7 +21,7 @@
     'LGPL-3',
     'depends': [
         'base',
-        'stock',
+        'stock','report_xlsx',
     ],
     'data': [
         'security/ir.model.access.csv',
