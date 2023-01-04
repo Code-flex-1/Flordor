@@ -8,7 +8,6 @@ class ProductMoveXlsx(models.TransientModel):
         string='Start Date',
         required=True,
         default=date.today().replace(day=1, month=1),
-        readonly=True,
     )
     end_date = fields.Date(
         string='End Date',
@@ -43,24 +42,13 @@ class ProductMoveXlsx(models.TransientModel):
             ],
             order='date',
         )
-        # flat_product_moves = [[
-        #     move.date,
-        #     move.picking_type_id.name,
-        #     move.reference,
-        #     str(move.qty_done)
-        #     if self.location_id == move.location_dest_id else 0,
-        #     str(move.qty_done)
-        #     if self.location_id != move.location_dest_id else 0,
-        #     str(0),
-        # ] for move in product_moves]
         tabled_product_moves = []
-        opening_balance = 0
-        total_in, total_out, total_balance = 0,0,0
+        total_in, total_out, opening_balance = 0, 0, 0
         for move in product_moves:
             in_qty = move.qty_done if self.location_id == move.location_dest_id else 0
-            total_in+=in_qty
+            total_in += in_qty
             out_qty = move.qty_done if self.location_id != move.location_dest_id else 0
-            total_out+=out_qty
+            total_out += out_qty
             tabled_product_moves.append([
                 move.date,
                 move.picking_type_id.name,
@@ -70,16 +58,19 @@ class ProductMoveXlsx(models.TransientModel):
                 str(opening_balance + in_qty - out_qty),
             ])
             opening_balance += in_qty - out_qty
-            total_balance+=opening_balance
-        tabled_product_moves.append([None,None,"Totals",total_in,total_out,total_balance,])
+        tabled_product_moves.append([
+            None,
+            None,
+            "Totals",
+            total_in,
+            total_out,
+            total_in - total_out,
+        ])
         data = {
             'start_date': self.start_date,
             'end_date': self.end_date,
             'moves': tabled_product_moves,
             'product_name': self.product_id.name,
-            'total_in':total_in,
-            'total_out':total_out,
-            'total_balance':total_balance,
         }
         return self.env.ref(
             "product_movement_report.product_move_xlsx_action").report_action(
@@ -122,15 +113,12 @@ class ProductReportXlsx(models.AbstractModel):
                     },
                     {
                         'header': 'In',
-                        'total_function': 'sum',
                     },
                     {
                         'header': 'Out',
-                        'total_function': 'sum',
                     },
                     {
                         'header': 'Balance',
-                        'total_function': 'sum',
                     },
                 ],
                 'data':
