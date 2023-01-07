@@ -1,4 +1,3 @@
-
 from odoo import models, fields, api
 
 
@@ -35,4 +34,3 @@ class SaleOrder(models.Model):
         if account:
             data['analytic_account_id'] = account[0].id
         return data
-
