@@ -1,4 +1,3 @@
-
 from odoo import api, Command, fields, models
 
 
@@ -23,5 +22,4 @@ class AccountPaymentRegister(models.TransientModel):
         payments = super()._create_payments()
         payments.analytic_account_id = self.analytic_account_id.id
         payments.invoice_line_ids.analytic_account_id = self.analytic_account_id.id
-
         return payments

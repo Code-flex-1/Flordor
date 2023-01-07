@@ -1,4 +1,3 @@
-
 from odoo import models, fields
 
 
@@ -10,4 +9,3 @@ class AccountMove(models.Model):
         related='stock_move_id.picking_id.analytic_account_id',
         required=False,
     )
-
