@@ -15,6 +15,13 @@ class SaleOrder(models.Model):
         invoice_values['analytic_account_id'] = self.analytic_account_id.id
         return invoice_values
 
+    def _create_invoices(self, grouped=False, final=False, date=None):
+        moves = super()._create_invoices(grouped, final, date)
+        moves.analytic_account_id = self.analytic_account_id
+        for line in moves.line_ids:
+            line.analytic_account_id = self.analytic_account_id.id
+        return moves
+
     @api.onchange('partner_id')
     def select_analytic_account_id(self):
         for order in self:

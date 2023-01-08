@@ -4,6 +4,7 @@ from odoo import fields, models, _
 
 class ProductMoveXlsx(models.TransientModel):
     _name = 'wizard.product.report'
+    _description = "wizard.product.report"
     start_date = fields.Date(
         string='Start Date',
         required=True,
@@ -80,7 +81,6 @@ class ProductMoveXlsx(models.TransientModel):
 
 
 class ProductReportXlsx(models.AbstractModel):
-    _name = 'report.product_movement_report.report_product'
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, *args):
