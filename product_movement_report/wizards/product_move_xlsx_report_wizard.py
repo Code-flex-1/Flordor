@@ -4,6 +4,7 @@ from odoo import fields, models, _
 
 class ProductMoveXlsx(models.TransientModel):
     _name = 'wizard.product.report'
+    _description = "wizard.product.report"
     start_date = fields.Date(
         string='Start Date',
         required=True,
