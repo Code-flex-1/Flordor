@@ -21,7 +21,8 @@
     'LGPL-3',
     'depends': [
         'base',
-        'stock','report_xlsx',
+        'stock',
+        'report_xlsx',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -29,14 +30,14 @@
         'wizards/product_move_xlsx_report_wizard.xml',
         'reports/product_move_report.xml',
     ],
-    'assets': {
-        'web.report_assets_common': [
-            "product_movement_report/static/src/css/*",
-        ],
-        'web.assets_backend': [
-            'product_movement_report/static/src/js/action_manager.js',
-        ],
-    },
+    # 'assets': {
+    #     'web.report_assets_common': [
+    #         "product_movement_report/static/src/css/*",
+    #     ],
+    #     'web.assets_backend': [
+    #         'product_movement_report/static/src/js/action_manager.js',
+    #     ],
+    # },
     "auto_install":
     True,
 }
