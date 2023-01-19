@@ -81,6 +81,7 @@ class ProductMoveXlsx(models.TransientModel):
 
 
 class ProductReportXlsx(models.AbstractModel):
+    _name = 'report.product_movement_report.report_product'
     _inherit = 'report.report_xlsx.abstract'
 
     def generate_xlsx_report(self, workbook, data, *args):
