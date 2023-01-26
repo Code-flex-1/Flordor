@@ -32,10 +32,7 @@ class HrOvertimeBatch(models.Model):
       default='new',
   )
 
-  counter = fields.Float('counter', compute="_compute_counter")
-
   # ==========================================================================
-  @api.depends
   def _actual_attendances_intervals_batch(self, employee_ids):
 
     batch_start_date = datetime.combine(self.date_from, time.min)
@@ -105,11 +102,7 @@ class HrOvertimeBatch(models.Model):
               "overtime_batch_id": self.id,
           })
 
-  def get_overtime_intervals(
-      self,
-      calendar,
-      employees,
-  ):
+  def get_overtime_intervals(self, calendar, employees):
     """"
         get difference between employees_actual_attendance_hours and employees_official_working_hours
         he work from 10:00 to 12 but he should be exist from 10:00 to 11:00 , so he has 1 hour overtime
@@ -136,11 +129,7 @@ class HrOvertimeBatch(models.Model):
   # ==========================================================================
   # ==========================================================================
 
-  def get_misstime_intervals(
-      self,
-      calendar,
-      employees,
-  ):
+  def get_misstime_intervals(self, calendar, employees):
     """"
         get difference between employees_actual_attendance_hours and employees_official_working_hours
         he work from 10:00 to 12 but he should be exist from 10:00 to 11:00 , so he has 1 hour overtime
@@ -193,11 +182,11 @@ class HrOvertimeBatch(models.Model):
     )
 
     for calendar, employees in employees_grouped_by_caledar.items():
-      overtime_intervals_batch = self.get_misstime_intervals(
+      misstime_intervals_batch = self.get_misstime_intervals(
           calendar,
           employees,
       )
-      for emp_id, overtime_intervals in overtime_intervals_batch.items():
+      for emp_id, overtime_intervals in misstime_intervals_batch.items():
         misstimes = _get_employee_misstime_by_day(overtime_intervals,)
         for date, misstime in misstimes.items():
           self.env['hr.misstime'].create({

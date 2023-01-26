@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Odoo: Debug",
+            "type": "python",
+            "request": "launch",
+            "python": "/home/code-flex-pc2/odoo-15/.venv/bin/python",
+            "program": "/home/code-flex-pc2/odoo-15/odoo-bin",
+            "justMyCode": true,
+            "args": [
+                "--dev=xml",
+                "--log-level=info",
+                "--config=/home/code-flex-pc2/odoo-15/Flordor/odoo.conf",
+            ]
+        }
+    ]
+}
