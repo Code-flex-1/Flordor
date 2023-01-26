@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name':
-    "Customer Analytic Account",
+    "Analytic Account Customization",
     'summary':
     """
   display customer related analytic account 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="hr_attendance_overtime_view_tree" model="ir.ui.view">
+        <field name="name">hr.overtime.batch.view.tree</field>
+        <field name="model">hr.overtime.batch</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="overtime_batch_sequence" />
+                <field name="date_from" />
+                <field name="date_to" />
+            </tree>
+        </field>
+    </record>
+    <!--===================================================================  -->
+    <record id="hr_attendance_overtime_form" model="ir.ui.view">
+        <field name="name">hr.overtime.batch.form</field>
+        <field name="model">hr.overtime.batch</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="overtime_batch" string="overtime_batch" type="object"
+                        class="oe_stat_button"
+                        icon="fa-calendar">
+                    </button>
+                </header>
+
+                <sheet>
+                    <group>
+                        <field name="date_from" />
+                        <field name="date_to" />
+                        <field name="overtime_ids" readonly='1' />
+                        <field name="misstime_ids" readonly='1' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--===================================================================  -->
+    <record id="action_hr_overtime_batch" model="ir.actions.act_window">
+        <field name="name">HR Overtime Batchs</field>
+        <field name="res_model">hr.overtime.batch</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--===================================================================  -->
+
+    <menuitem
+        id="hr_overtime_batch_menu"
+        name="Overtime Btaches"
+        parent="hr_attendance_overtime_root"
+        action="action_hr_overtime_batch"
+        sequence="10" />
+
+</odoo>
