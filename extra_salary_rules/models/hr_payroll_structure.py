@@ -15,13 +15,21 @@ class HrPayrollStructure(models.Model):
   @api.model
   def _get_default_rule_ids(self):
     rules = super()._get_default_rule_ids()
-    rules.append((0, 0, {
-        'name': _('New Basic Salary'),
+    rules += [(0, 0, {
+        'name': _('Housing Allowance'),
         'sequence': 1,
-        'code': 'NBASIC',
-        'category_id': self.env.ref('hr_payroll.BASIC').id,
+        'code': 'HALLW',
+        'category_id': self.env.ref('hr_payroll.ALW').id,
         'condition_select': 'none',
         'amount_select': 'code',
-        'amount_python_compute': 'result = payslip.paid_amount',
-    }),)
+        'amount_python_compute': 'result = contract.housing_allowance',
+    },), (0, 0, {
+        'name': _('Transportation Allowance'),
+        'sequence': 1,
+        'code': 'TALLW',
+        'category_id': self.env.ref('hr_payroll.ALW').id,
+        'condition_select': 'none',
+        'amount_select': 'code',
+        'amount_python_compute': 'result = contract.transportation_allowance',
+    },),]
     return rules
