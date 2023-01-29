@@ -2,9 +2,7 @@
     'name':
         "HR Attendance Overtime",
     'summary':
-        """
-  HR Attendance Overtime
-        """,
+        """  HR Attendance Overtime        """,
     'author':
         "Code Flex",
     'category':
