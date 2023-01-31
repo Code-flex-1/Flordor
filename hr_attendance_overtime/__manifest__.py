@@ -13,6 +13,7 @@
         'LGPL-3',
     'depends': [
         'hr_attendance',
+        'hr_payroll',
         'hr',
     ],
     'external_dependencies': {

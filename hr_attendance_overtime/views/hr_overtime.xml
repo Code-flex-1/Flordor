@@ -25,6 +25,7 @@
                         <field name="duration" />
                         <field name="date" />
                         <field name="notes" />
+                        <field name="paid_amount" />
                         <field name="overtime_batch_id" />
                     </group>
                 </sheet>

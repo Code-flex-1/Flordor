@@ -16,20 +16,12 @@ class HrPayrollStructure(models.Model):
   def _get_default_rule_ids(self):
     rules = super()._get_default_rule_ids()
     rules += [(0, 0, {
-        'name': _('Housing Allowance'),
+        'name': _('Overtime'),
         'sequence': 1,
-        'code': 'HALLW',
+        'code': 'OVTR',
         'category_id': self.env.ref('hr_payroll.ALW').id,
         'condition_select': 'none',
         'amount_select': 'code',
-        'amount_python_compute': 'result = contract.housing_allowance',
-    },), (0, 0, {
-        'name': _('Transportation Allowance'),
-        'sequence': 1,
-        'code': 'TALLW',
-        'category_id': self.env.ref('hr_payroll.ALW').id,
-        'condition_select': 'none',
-        'amount_select': 'code',
-        'amount_python_compute': 'result = contract.transportation_allowance',
-    }),]
+        'amount_python_compute': 'result = payslip.total_overtime_paid_amount',
+    },)]
     return rules
