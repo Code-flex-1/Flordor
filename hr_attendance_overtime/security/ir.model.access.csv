@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-hr_overtime,hr.overtime,model_hr_overtime,,1,1,1,1
-hr_misstime,hr.misstime,model_hr_misstime,,1,1,1,1
-hr_overtime_batch,hr.overtime.batch,model_hr_overtime_batch,,1,1,1,1
