@@ -16,9 +16,6 @@
         'hr_payroll',
         'hr',
     ],
-    'external_dependencies': {
-        'python': ['toolz']
-    },
     'data': [
         'security/ir.model.access.csv',
         'views/hr_overtime.xml',
