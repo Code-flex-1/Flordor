@@ -11,6 +11,9 @@
         '0.1',
     'license':
         'LGPL-3',
+    'external_dependencies': {
+        'python': ['toolz']
+    },
     'depends': [
         'hr_attendance',
         'hr_payroll',
