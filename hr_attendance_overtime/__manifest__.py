@@ -12,7 +12,7 @@
     'license':
         'LGPL-3',
     'external_dependencies': {
-        'python': ['toolz']
+        'python3': ['toolz']
     },
     'depends': [
         'hr_attendance',
