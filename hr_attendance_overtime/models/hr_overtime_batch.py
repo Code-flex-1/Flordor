@@ -1,7 +1,7 @@
 from datetime import datetime, time
 import pytz
-import toolz as T
 import toolz.curried as TC
+import toolz as T
 from odoo import _, api, fields, models
 from odoo.addons.resource.models.resource import Intervals
 
