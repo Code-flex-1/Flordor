@@ -2,7 +2,7 @@
     'name':
         "HR Attendance Overtime",
     'summary':
-        """  HR Attendance Overtime        """,
+        """  HR Attendance Overtime""",
     'author':
         "Code Flex",
     'category':
@@ -11,14 +11,14 @@
         '0.1',
     'license':
         'LGPL-3',
-    'external_dependencies': {
-        'python': ['toolz']
-    },
     'depends': [
         'hr_attendance',
         'hr_payroll',
         'hr',
     ],
+    'external_dependencies': {
+        'python': ['toolz'],
+    },
     'data': [
         'security/ir.model.access.csv',
         'views/hr_overtime.xml',

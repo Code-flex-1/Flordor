@@ -1,9 +1,9 @@
-from odoo import _, api, fields, models
-import toolz as T
-import toolz.curried as TC
-from odoo.addons.resource.models.resource import Intervals
 from datetime import datetime, time
 import pytz
+import toolz.curried as TC
+import toolz as T
+from odoo import _, api, fields, models
+from odoo.addons.resource.models.resource import Intervals
 
 
 class HrOvertimeBatch(models.Model):
