@@ -1,0 +1,10 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Initialize Clean Env",
+            "type": "shell",
+            "command": "sudo -u postgres dropdb flordor;  python odoo-bin --dev=all -c /home/code-flex-pc2/odoo-15/Flordor/odoo.conf -d flordor "
+        }
+    ]
+}
