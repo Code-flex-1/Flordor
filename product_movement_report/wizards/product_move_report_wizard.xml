@@ -33,10 +33,10 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-    <menuitem name="Product Moves Report"
+    <!-- <menuitem name="Product Moves Report"
         id="product_movement_report"
         sequence="200"
         parent="stock.menu_warehouse_report"
-        action="product_movement_report_wizard" />
+        action="product_movement_report_wizard" /> -->
 
 </odoo>

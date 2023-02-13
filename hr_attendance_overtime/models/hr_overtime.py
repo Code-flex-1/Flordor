@@ -17,8 +17,15 @@ class HrOvertime(models.Model):
 
   def _compute_paid_amount(self):
     for overtime in self:
-      if overtime.duration >= 60 and overtime.employee_id.contract_id:
-        overtime.paid_amount = (overtime.duration / 60) * (overtime.employee_id.contract_id.wage /30/
-                                                           8)
+      overtime_rules = self.env['hr.overtime.rule'].search([
+          ('overtime_duration', '<=', overtime.duration),
+      ])
+      if overtime_rules:
+        selected_rule = max(overtime_rules, key=lambda rule: rule.overtime_duration)
+        if selected_rule.paid_type == 'fixed':
+          overtime.paid_amount = (overtime.duration / 60) * selected_rule.fixed_amount
+        elif selected_rule.paid_type == 'percentage':
+          overtime.paid_amount = (overtime.duration / 60) * (
+              (overtime.employee_id.contract_id.wage / 30 / 8) * selected_rule.rate_amount)
       else:
         overtime.paid_amount = 0

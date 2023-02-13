@@ -10,6 +10,7 @@
                 <field name="date" />
                 <field name="employee_id" />
                 <field name="duration" />
+                <field name="paid_amount" />
             </tree>
         </field>
     </record>
@@ -74,5 +75,10 @@
         parent="hr_attendance_overtime_root"
         action="action_hr_overtime"
         sequence="10" />
+    <menuitem
+        id="hr_overtime_config_menu"
+        name="Configurations"
+        parent="hr_attendance_overtime_root"
+        sequence="11" />
 
 </odoo>
