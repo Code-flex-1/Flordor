@@ -54,7 +54,7 @@
     </record>
     <!--===================================================================  -->
     <record id="action_hr_misstime" model="ir.actions.act_window">
-        <field name="name">HR misstime</field>
+        <field name="name">HR Deduction Time</field>
         <field name="res_model">hr.misstime</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -68,7 +68,7 @@
 
     <menuitem
         id="hr_misstime_menu"
-        name="Misstime"
+        name="Deduction Time"
         parent="hr_attendance_overtime_root"
         action="action_hr_misstime"
         sequence="10" />
