@@ -27,5 +27,7 @@ class HrOvertime(models.Model):
         elif selected_rule.paid_type == 'percentage':
           overtime.paid_amount = (overtime.duration / 60) * (
               (overtime.employee_id.contract_id.wage / 30 / 8) * selected_rule.rate_amount)
+        else:
+          overtime.paid_amount = 0
       else:
         overtime.paid_amount = 0
