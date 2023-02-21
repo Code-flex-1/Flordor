@@ -24,6 +24,7 @@
         'views/hr_overtime.xml',
         'views/hr_misstime.xml',
         'views/hr_overtime_batch.xml',
+        'views/hr_overtime_rule.xml',
         'data/sequences.xml',
     ],
 }

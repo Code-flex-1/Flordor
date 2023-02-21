@@ -14,3 +14,14 @@ class HrPayslip(models.Model):
       payslip.total_overtime_paid_amount = sum(
           payslip.employee_id.overtime_ids.filtered(lambda overtime: payslip.date_from <= overtime.
                                                     date <= payslip.date_to).mapped('paid_amount'))
+
+  @api.onchange('struct_id')
+  def fill_inputs_ids(self):
+    inputs_ids = self.struct_id.input_line_type_ids
+    self.input_line_ids = [(5, 0, 0)] + [(
+        0,
+        0,
+        {
+            'input_type_id': input.id
+        },
+    ) for input in inputs_ids]
