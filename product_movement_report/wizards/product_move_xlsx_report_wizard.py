@@ -98,6 +98,7 @@ class ProductMoveXlsx(models.TransientModel):
         'moves': tabled_product_moves,
         'product_name': self.product_id.name,
     }
+    # 
     return self.env.ref("product_movement_report.product_move_xlsx_action").report_action(
         self,
         data=data,
