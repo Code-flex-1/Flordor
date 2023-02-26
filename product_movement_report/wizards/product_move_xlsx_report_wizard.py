@@ -29,14 +29,9 @@ class ProductMoveXlsx(models.TransientModel):
   def prepare_product_moves_xlsx_report(self):
     inital_product_moves = self.env['stock.move.line'].search(
         [
-            '&',
             ('product_id', '=', self.product_id.id),
             ('state', '=', 'done'),
-            (
-                'date',
-                '<',
-                datetime.combine(date=self.start_date, time=time.max),
-            ),
+            ('date', '<', datetime.combine(date=self.start_date, time=time.max)),
             '|',
             ('location_id', '=', self.location_id.id),
             ('location_dest_id', '=', self.location_id.id),
@@ -44,31 +39,23 @@ class ProductMoveXlsx(models.TransientModel):
         order='date',
     )
     tabled_product_moves = []
-    if inital_product_moves:
-      init_in_qty = sum(
-          map(lambda move: move.qty_done,
-              filter(lambda move: self.location_id == move.location_dest_id, inital_product_moves)))
-      init_out_qty = sum(
-          map(lambda move: move.qty_done,
-              filter(lambda move: self.location_id != move.location_dest_id, inital_product_moves)))
-      init_open_balance = init_in_qty - init_out_qty
-      tabled_product_moves.append([
-          None,
-          None,
-          "Initial Balance",
-          str(init_in_qty),
-          str(init_out_qty),
-          str(init_open_balance),
-      ])
-    else:
-      tabled_product_moves.append([
-          None,
-          None,
-          "Initial Balance",
-          str(0),
-          str(0),
-          str(0),
-      ])
+    total_in, total_out, opening_balance = 0, 0, 0
+    init_in_qty = sum(
+        map(lambda move: move.qty_done,
+            filter(lambda move: self.location_id == move.location_dest_id, inital_product_moves)))
+    init_out_qty = sum(
+        map(lambda move: move.qty_done,
+            filter(lambda move: self.location_id != move.location_dest_id, inital_product_moves)))
+    init_open_balance = init_in_qty - init_out_qty
+    opening_balance = init_open_balance
+    tabled_product_moves.append([
+        None,
+        None,
+        "Initial Balance",
+        str(init_in_qty),
+        str(init_out_qty),
+        str(init_open_balance),
+    ])
     product_moves = self.env['stock.move.line'].search(
         [
             '&',
@@ -83,7 +70,6 @@ class ProductMoveXlsx(models.TransientModel):
         ],
         order='date',
     )
-    total_in, total_out, opening_balance = 0, 0, 0
     for move in product_moves:
       in_qty = move.qty_done if self.location_id == move.location_dest_id else 0
       total_in += in_qty
@@ -102,9 +88,9 @@ class ProductMoveXlsx(models.TransientModel):
         None,
         None,
         "Totals",
-        total_in,
-        total_out,
-        total_in - total_out,
+        total_income := total_in + init_in_qty,
+        total_outcome := total_out + init_out_qty,
+        total_income - total_outcome,
     ])
     data = {
         'start_date': self.start_date,
@@ -112,6 +98,7 @@ class ProductMoveXlsx(models.TransientModel):
         'moves': tabled_product_moves,
         'product_name': self.product_id.name,
     }
+    # 
     return self.env.ref("product_movement_report.product_move_xlsx_action").report_action(
         self,
         data=data,
