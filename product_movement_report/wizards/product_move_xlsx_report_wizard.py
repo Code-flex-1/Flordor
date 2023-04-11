@@ -71,10 +71,15 @@ class ProductMoveXlsx(models.TransientModel):
         order='date',
     )
     for move in product_moves:
-      in_qty = move.qty_done if self.location_id == move.location_dest_id else 0
-      total_in += in_qty
-      out_qty = move.qty_done if self.location_id != move.location_dest_id else 0
-      total_out += out_qty
+      if self.location_id == move.location_dest_id == move.location_id:
+        in_qty = out_qty = move.qty_done
+        total_in += in_qty
+        total_out += out_qty
+      else:
+        in_qty = move.qty_done if self.location_id == move.location_dest_id else 0
+        total_in += in_qty
+        out_qty = move.qty_done if self.location_id != move.location_dest_id else 0
+        total_out += out_qty
       tabled_product_moves.append([
           move.date,
           move.picking_type_id.name,
@@ -98,7 +103,7 @@ class ProductMoveXlsx(models.TransientModel):
         'moves': tabled_product_moves,
         'product_name': self.product_id.name,
     }
-    # 
+    #
     return self.env.ref("product_movement_report.product_move_xlsx_action").report_action(
         self,
         data=data,
