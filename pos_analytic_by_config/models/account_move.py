@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class AccountMove(models.Model):
@@ -10,6 +10,7 @@ class AccountMove(models.Model):
   )
 
   # override create method to add analytic account
+  @api.model
   def create(self, vals):
     result = super(AccountMove, self).create(vals)
     if self._context.get('analytic_account_id') and self._context.get('pos_analytic'):
