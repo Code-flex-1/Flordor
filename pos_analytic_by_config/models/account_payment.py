@@ -1,11 +1,13 @@
-from odoo import models, fields
+from odoo import api, fields, models
 
 
-class AccountMoveLine(models.Model):
-    _inherit = 'account.move.line'
+class AccountPayment(models.Model):
+    _inherit = 'account.payment'
+
     analytic_account_id = fields.Many2one(
         comodel_name='account.analytic.account',
         string='Analytic Account',
-        related='move_id.analytic_account_id',
+        domain="[('partner_id', '=',partner_id)]",
         required=False,
     )
+
