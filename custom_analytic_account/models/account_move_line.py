@@ -9,4 +9,3 @@ class AccountMoveLine(models.Model):
         related='move_id.analytic_account_id',
         required=False,
     )
-    #

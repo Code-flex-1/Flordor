@@ -24,7 +24,6 @@ class SaleOrder(models.Model):
 
     @api.onchange('partner_id')
     def select_analytic_account_id(self):
-        print('select_analytic_account_id')
         for order in self:
             if order.partner_id:
                 related_accounts = self.env['account.analytic.account'].search(
