@@ -22,8 +22,8 @@
     ],
     "data": [
         "views/pos_config_view.xml",
-        'views/account_payment.xml',
-        'views/stock_picking.xml',
-        'views/account_move.xml',
+        # 'views/account_payment.xml',
+        # 'views/stock_picking.xml',
+        # 'views/account_move.xml',
     ],
 }
